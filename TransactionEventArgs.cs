@@ -10,7 +10,7 @@ namespace Week12_Lab01_BankApp
     {
         public decimal Amount {  get;  }
 
-        public TransactionEventArgs(string personName, decimal amount, bool success ) : base(personName, success) { 
+        public TransactionEventArgs(string name, decimal amount, bool success ) : base(name, success) { 
             this.Amount = amount;
         }
     }
