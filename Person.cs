@@ -29,14 +29,15 @@ namespace Week12_Lab01_BankApp
                 throw new AccountException(ExceptionType.PASSWORD_INCORRECT);
 
             }
-            else { 
-                
+            else {
+                this.IsAuthenticated = true;
+                this.OnLogin.Invoke(this, new LoginEventArgs(this.Name, this.IsAuthenticated));
             }
         }
-        public void Logout() { }
+        public void Logout() { this.IsAuthenticated = false; }
         
         public override String ToString() {
-            return this.ToString();
+            return $"Person : {this.Name}";
         }
     }
 }

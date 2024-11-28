@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account.cs" />
     <Compile Include="AccountException.cs" />
     <Compile Include="AccountType.cs" />
     <Compile Include="DayTime.cs" />
