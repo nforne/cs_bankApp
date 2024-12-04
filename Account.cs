@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Week12_Lab01_BankApp
 {
-    internal abstract class Account
+    public abstract class Account
     {
         private static int LAST_NUMBER = 100_000;
         protected readonly List<Person> users;
@@ -17,17 +17,32 @@ namespace Week12_Lab01_BankApp
         public decimal Balance { get; protected set; }
         public decimal LowestBalance { get; protected set; }
 
-        public Account(string type, decimal balance) { 
+        public Account(string type, decimal balance)
+        { 
+            this.Number = (LAST_NUMBER++).ToString();
+            this.Balance = balance;
+            this.LowestBalance = balance
             this.users = new List<Person>();
+            this.transactions = new List<Transaction>();
         
         }
 
-        public void Deposit(decimal balance, Person person) { }
-        public void AddUser( Person person) { }
-        public bool IsUser( String name) {
+        public void Deposit(decimal balance, Person person)
+        {
+            
+        }
+        public void AddUser( Person person) 
+        {
+            
+        }
+        public bool IsUser( String name)
+        {
             return true;
         }
-        public virtual void OnTransactionOccur(Object sender, EventArgs args) { }
+        public virtual void OnTransactionOccur(Object sender, EventArgs args) 
+        {
+        
+        }
 
         protected abstract void PrepareMonthlyStatement();
 
