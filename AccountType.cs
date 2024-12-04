@@ -13,4 +13,12 @@ namespace Week12_Lab01_BankApp
         Visa,
         Line_of_credit
     }
+
+    internal class AccType
+    {
+        public static readonly String VS = "VS-"; // visa
+        public static readonly String SV = "SV-"; // savings
+        public static readonly String CK = "CK-"; // chequing          
+
+    }
 }

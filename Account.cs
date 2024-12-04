@@ -10,7 +10,7 @@ namespace Week12_Lab01_BankApp
     {
         private static int LAST_NUMBER = 100_000;
         protected readonly List<Person> users;
-        public readonly List<Transaction> transactions;
+        public readonly List<Transaction> transactions = new List<Transaction>();
         public virtual event EventHandler Onlogin;
         public virtual event EventHandler OnTransaction;
         public string Number {  get;}
@@ -19,20 +19,62 @@ namespace Week12_Lab01_BankApp
 
         public Account(string type, decimal balance) { 
             this.users = new List<Person>();
+            this.Number = type + "-" + LAST_NUMBER; ;
+            LAST_NUMBER++;
+            (this.Balance, this.LowestBalance) = (balance, balance);
         
         }
 
-        public void Deposit(decimal balance, Person person) { }
-        public void AddUser( Person person) { }
-        public bool IsUser( String name) {
-            return true;
+        public void Deposit(decimal balance, Person person) {
+            if (this.Balance + balance >= this.LowestBalance)
+            {
+                this.Balance += balance;
+            }
+            //else {
+            //    Console.WriteLine($"Amount request not allowed :" +
+            //        $"\n    CurrentBalance = ${this.Balance}CAD" +
+            //        $"\n    LowestBalance allowed = ${this.LowestBalance}CAD" +
+            //        $"\n    Requested amount = ${balance}CAD");
+            //}
+
+            transactions.Add(new Transaction(this.Number, balance, person, Utils.Now));
+            
         }
-        public virtual void OnTransactionOccur(Object sender, EventArgs args) { }
+        public void AddUser( Person person) {
+            this.users.Add(person);
+        }
+        public bool IsUser( String name) {
+            bool result = false;
+            foreach (Person person in this.users) {
+                if (person.Name.Equals(name)){
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+        public virtual void OnTransactionOccur(Object sender, EventArgs args) {
+            this.OnTransaction.Invoke(sender, args);
+        }
 
         protected abstract void PrepareMonthlyStatement();
 
-        public override string ToString() { 
-            return this.ToString();
+        public override string ToString() {
+            String outPut = "";
+            outPut += $"AccountNumber : {this.Number}, ";
+
+            String holdersNames = "";
+            foreach (Person p in this.users)
+            {
+                string commaOrNot = this.users[this.users.Count - 1] == p ? "" : ", ";
+                holdersNames += p.Name + commaOrNot;
+            }
+
+            outPut += $"\n  AccountHolder(s) : {holdersNames}, ";
+            outPut += $"\n  AccountBalance : {this.Balance}, ";
+            outPut += $"\n  AccountTransactions : \n{String.Join(", \n", this.transactions)}\n";
+
+            return outPut;
         }
 
     }
