@@ -1,0 +1,2 @@
+C:\Users\Safe2Q\Downloads\COL - SEM - A\Courses - A\Semester A\COMP 123 - TBD - Programming II\Projects\Week12_Lab01_BankApp\obj\Debug\Week12_Lab01_BankApp.csproj.AssemblyReference.cache
+C:\Users\Safe2Q\Downloads\COL - SEM - A\Courses - A\Semester A\COMP 123 - TBD - Programming II\Projects\Week12_Lab01_BankApp\obj\Debug\Week12_Lab01_BankApp.csproj.CoreCompileInputs.cache

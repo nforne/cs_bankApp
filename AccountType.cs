@@ -14,7 +14,7 @@ namespace Week12_Lab01_BankApp
         Line_of_credit
     }
 
-    internal class AccType
+    internal static class AccType
     {
         public static readonly String VS = "VS-"; // visa
         public static readonly String SV = "SV-"; // savings

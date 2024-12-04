@@ -75,6 +75,7 @@
     <Compile Include="Account.cs" />
     <Compile Include="AccountException.cs" />
     <Compile Include="AccountType.cs" />
+    <Compile Include="Bank.cs" />
     <Compile Include="CheckingAccount.cs" />
     <Compile Include="DayTime.cs" />
     <Compile Include="ExceptionType.cs" />
