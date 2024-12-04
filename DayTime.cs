@@ -35,25 +35,30 @@ namespace Week12_Lab01_BankApp
             long mi = 0;
 
             long checker = this.minutes;
-            if (checker >= 518_400) {
+            if (checker >= 518_400)
+            {
                 yr = ((minutes - (minutes % 518_400)) / 518_400) + 2023;
-                checker = minutes % 518_400;    
+                checker = minutes % 518_400;
             }
+            else { yr = 2023; }
             if (checker >= 43_200)
             {
-                mo = ( (checker - (checker % 43_200))/ 43_200 ) + 0;
+                mo = ((checker - (checker % 43_200)) / 43_200);
                 checker = checker % 43_200;
             }
+            else { mo = 1; }
             if (checker >= 1_440)
             {
                 dy = ((checker - (checker % 1_440)) / 1_440) + 0;
                 checker = checker % 1_440;
             }
+            else { dy = 1; }
             if (checker >= 60)
             {
                 hr = ((checker - (checker % 60)) / 60) + 0;
                 checker = checker % 60;
             }
+            else { hr = 00; }
             mi = checker;
 
 

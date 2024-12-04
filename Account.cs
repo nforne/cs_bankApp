@@ -18,6 +18,7 @@ namespace Week12_Lab01_BankApp
         public decimal LowestBalance { get; protected set; }
 
         public Account(string type, decimal balance) { 
+            this.users = new List<Person>();
         
         }
 
