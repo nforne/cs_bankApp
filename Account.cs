@@ -30,12 +30,14 @@ namespace Week12_Lab01_BankApp
             {
                 this.Balance += balance;
             }
-            //else {
-            //    Console.WriteLine($"Amount request not allowed :" +
-            //        $"\n    CurrentBalance = ${this.Balance}CAD" +
-            //        $"\n    LowestBalance allowed = ${this.LowestBalance}CAD" +
-            //        $"\n    Requested amount = ${balance}CAD");
-            //}
+            else
+            {
+                //Console.WriteLine($"Amount request not allowed :" +
+                //    $"\n    CurrentBalance = ${this.Balance}CAD" +
+                //    $"\n    LowestBalance allowed = ${this.LowestBalance}CAD" +
+                //    $"\n    Requested amount = ${balance}CAD");
+                return;
+            }
 
             transactions.Add(new Transaction(this.Number, balance, person, Utils.Now));
             
