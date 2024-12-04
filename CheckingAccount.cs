@@ -49,7 +49,7 @@ namespace Week12_Lab01_BankApp
             
         }        
 
-        protected override void PrepareMonthlyStatement()
+        public override void PrepareMonthlyStatement()
         {
             decimal serviceCharge = COST_PER_TRANSACTION * this.transactions.Count;
             decimal interest = (this.LowestBalance * INTEREST_RATE) / 12;

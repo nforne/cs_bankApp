@@ -54,7 +54,7 @@ namespace Week12_Lab01_BankApp
 
         }
 
-        protected override void PrepareMonthlyStatement()
+        public override void PrepareMonthlyStatement()
         {            
             decimal interest = ((this.creditLimit - this.Balance) * INTEREST_RATE) / 12;
             this.Balance -= interest;            

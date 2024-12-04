@@ -59,7 +59,12 @@ namespace Week12_Lab01_BankApp
             this.OnTransaction.Invoke(sender, args);
         }
 
-        protected abstract void PrepareMonthlyStatement();
+        public virtual void OnLoginOccur(Object sender, EventArgs args)
+        {
+            this.Onlogin.Invoke(sender, args);
+        }
+
+        public abstract void PrepareMonthlyStatement();
 
         public override string ToString() {
             String outPut = "";

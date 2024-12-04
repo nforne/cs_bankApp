@@ -137,6 +137,18 @@ namespace Week12_Lab01_BankApp
 
         }
 
+        public static void PrintAccounts()
+        {
+            foreach (String acc in ACCOUNTS.Keys) {
+                Console.WriteLine(ACCOUNTS[acc].ToString());
+            }
+        }
 
+        public static void PrintPersons()
+        {
+            foreach (String user in USERS.Keys) {
+                Console.WriteLine(USERS[user].ToString());
+            }
+        }
     }
 }
