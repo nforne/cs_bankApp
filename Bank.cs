@@ -90,14 +90,22 @@ namespace Week12_Lab01_BankApp
             GetAccount(number).AddUser(GetUser(name));
         }
         public static Account GetAccount(String number){
-            if (ACCOUNTS.Keys.Contains(number))
+            Account outPut = null;
+            try
             {
-                return ACCOUNTS[number];
+                if (ACCOUNTS.Keys.Contains(number))
+                {
+                    outPut = ACCOUNTS[number];
+                }
+                else
+                {
+                    throw new AccountException(ExceptionType.ACCOUNT_DOES_NOT_EXIST);
+                };
             }
-            else
-            {
-                throw new AccountException(ExceptionType.ACCOUNT_DOES_NOT_EXIST);
-            };
+            catch (AccountException e) { Console.WriteLine(e.Message); }
+            catch (Exception e) { Console.WriteLine(e.Message); }; 
+
+            return outPut;
         }
         public static Person GetUser(String name){
             Person p = null;
@@ -106,26 +114,26 @@ namespace Week12_Lab01_BankApp
                 if (USERS[key].Name.Equals(name)) { p = USERS[key]; break; }
             }
             try
-            {                            
+            {
                 if (p == null)
                 {
                     throw new AccountException(ExceptionType.USER_DOES_NOT_EXIST);
-                };                
+                };
             }
-            catch (AccountException e) {
-                Console.WriteLine(e.Message);
-            }
+            catch (AccountException e) { Console.WriteLine(e.Message); }
+            catch (Exception e) { Console.WriteLine(e.Message); };   
+            
             return p;
 
         }
         public static void SaveAccounts(String filename){
-            TextWriter wr = new StreamWriter(filename + ".txt");
+            TextWriter wr = new StreamWriter(filename);
             String jsonData = JsonSerializer.Serialize(ACCOUNTS);            
             wr.WriteLine(jsonData);
             wr.Close();
         }
         public static void SaveUsers(String filename){
-            TextWriter wr = new StreamWriter(filename + ".txt");
+            TextWriter wr = new StreamWriter(filename);
             String jsonData = JsonSerializer.Serialize(USERS);
             wr.WriteLine(jsonData);
             wr.Close();
@@ -162,3 +170,10 @@ namespace Week12_Lab01_BankApp
         }
     }
 }
+
+//try
+//{
+
+//}
+//catch (AccountException e) { Console.WriteLine(e.Message); }
+//catch (Exception e) { Console.WriteLine(e.Message); };

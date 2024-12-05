@@ -69,11 +69,3 @@ namespace Week12_Lab01_BankApp
         }
     }
 }
-
-
-//try
-//{
-    
-//}
-//catch (AccountException e) { Console.WriteLine(e.Message); }
-//catch (Exception e) { Console.WriteLine(e.Message); };
