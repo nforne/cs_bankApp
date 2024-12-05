@@ -24,10 +24,10 @@ namespace Week12_Lab01_BankApp
         public override string ToString() {
             string transactionType = this.Amount >= 0 ? "Deposit" : "Withdraw";
             return $"Transaction Type: {transactionType}" +
-                $"Account Number : {this.AccountNumber}, " +
-                $"Transaction Originator : {this.Originator.Name}, " +
-                $"Amount : {this.Amount}, " +
-                $"Transaction Time : {Utils.Now} ";
+                $" Account Number : {this.AccountNumber}, " +
+                $" Transaction Originator : {this.Originator.Name}, " +
+                $" Amount : {this.Amount}, " +
+                $" Transaction Time : {Utils.Now} ";
         }
     }
 }
