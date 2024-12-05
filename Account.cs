@@ -19,7 +19,7 @@ namespace Week12_Lab01_BankApp
 
         public Account(string type, decimal balance) { 
             this.users = new List<Person>();
-            this.Number = type + "-" + LAST_NUMBER; ;
+            this.Number = type + LAST_NUMBER; ;
             LAST_NUMBER++;
             (this.Balance, this.LowestBalance) = (balance, balance);
         
