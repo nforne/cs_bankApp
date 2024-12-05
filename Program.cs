@@ -13,8 +13,8 @@ namespace Week12_Lab01_BankApp
             testBank();
         }
 
-        static void testBank() {
-            Bank bank = new Bank();
+        static void testBank() {            
+            Bank.LoadBank();
             Console.WriteLine($"\nAll acounts: {Utils.Now}\n-------------------------------");
             Bank.PrintAccounts();
             Console.WriteLine($"\nAll Users: {Utils.Now}\n-------------------------------");

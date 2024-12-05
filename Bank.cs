@@ -15,7 +15,7 @@ namespace Week12_Lab01_BankApp
         public static readonly Dictionary<string, Account> ACCOUNTS = new Dictionary<string, Account>();
         public static readonly Dictionary<string, Person> USERS = new Dictionary<string, Person>();
 
-        public Bank() {
+        private Bank() {
             //initialize the USERS collection
             AddPerson("Narendra", "1234-5678"); //0
             AddPerson("Ilia", "2345-6789"); //1
@@ -69,6 +69,10 @@ namespace Week12_Lab01_BankApp
             AddUserToAccount(number, "Patrick");
             AddUserToAccount(number, "Hao");
 
+        }
+
+        public static void LoadBank() {
+            new Bank();
         }
         public static void AddPerson(String name, String sin){
             AddUser(name, sin);
