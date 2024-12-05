@@ -79,7 +79,7 @@ namespace Week12_Lab01_BankApp
 
             outPut += $"\n  AccountHolder(s) : {holdersNames}, ";
             outPut += $"\n  AccountBalance : {this.Balance}, ";
-            outPut += $"\n  AccountTransactions : \n{String.Join(", \n", this.transactions)}\n";
+            outPut += $"\n  AccountTransactions : \n        {String.Join("\n        ", this.transactions)}\n";
 
             return outPut;
         }

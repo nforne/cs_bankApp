@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Week12_Lab01_BankApp;
 
 namespace Week12_Lab01_BankApp
 {
@@ -27,30 +28,36 @@ namespace Week12_Lab01_BankApp
             bool success = false;
             Transaction t = new Transaction(this.Number, amount, person, Utils.Now);
             TransactionEventArgs te = new TransactionEventArgs(person.Name, amount, success);
+            try
+            {
+                if (!this.IsUser(person.Name))
+                {
+                    this.OnTransactionOccur(t, te);
+                    throw new AccountException(ExceptionType.NAME_NOT_ASSOCIATED_WITH_ACCOUNT);
 
-            if (!this.IsUser(person.Name))
-            {
-                this.OnTransactionOccur(t, te);
-                throw new AccountException(ExceptionType.NAME_NOT_ASSOCIATED_WITH_ACCOUNT);
-            }
-            else if (!person.IsAuthenticated)
-            {
-                this.OnTransactionOccur(t, te);
-                throw new AccountException(ExceptionType.USER_NOT_LOGGED_IN);
-            }
-            else if (amount > this.creditLimit || amount > (this.Balance - this.LowestBalance))
-            {
-                this.OnTransactionOccur(t, te);
-                throw new AccountException(ExceptionType.CREDIT_LIMIT_HAS_BEEN_EXCEEDED);
-            }
-            else
-            {
-                success = amount <= this.creditLimit && amount <= (this.Balance - this.LowestBalance);
-                this.OnTransactionOccur(t, te);
-                this.Deposit((-1 * amount), person);
-                this.transactions.Add(t);
-            };
+                }
+                else if (!person.IsAuthenticated)
+                {
+                    this.OnTransactionOccur(t, te);
+                    throw new AccountException(ExceptionType.USER_NOT_LOGGED_IN);
 
+                }
+                else if (amount > this.creditLimit || amount > (this.Balance - this.LowestBalance))
+                {
+                    this.OnTransactionOccur(t, te);
+                    throw new AccountException(ExceptionType.CREDIT_LIMIT_HAS_BEEN_EXCEEDED);
+                }
+                else
+                {
+                    success = amount <= this.creditLimit && amount <= (this.Balance - this.LowestBalance);
+                    this.OnTransactionOccur(t, te);
+                    this.Deposit((-1 * amount), person);
+                    this.transactions.Add(t);
+                };
+
+            }
+            catch (AccountException e) { Console.WriteLine(e.Message); }
+            catch (Exception e) { Console.WriteLine(e.Message); };            
 
         }
 
@@ -62,3 +69,11 @@ namespace Week12_Lab01_BankApp
         }
     }
 }
+
+
+//try
+//{
+    
+//}
+//catch (AccountException e) { Console.WriteLine(e.Message); }
+//catch (Exception e) { Console.WriteLine(e.Message); };

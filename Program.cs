@@ -14,10 +14,12 @@ namespace Week12_Lab01_BankApp
         }
 
         static void testBank() {
-            Console.WriteLine("\nAll acounts:");
+            Bank bank = new Bank();
+            Console.WriteLine($"\nAll acounts: {Utils.Now}\n-------------------------------");
             Bank.PrintAccounts();
-            Console.WriteLine("\nAll Users:");
+            Console.WriteLine($"\nAll Users: {Utils.Now}\n-------------------------------");
             Bank.PrintPersons();
+
             Person p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10;
             p0 = Bank.GetUser("Narendra");
             p1 = Bank.GetUser("Ilia");
@@ -35,6 +37,7 @@ namespace Week12_Lab01_BankApp
             p4.Login("567"); p5.Login("678");
             p6.Login("789"); p7.Login("890");
             p10.Login("234"); p8.Login("901");
+
             //a visa account
             VisaAccount a = Bank.GetAccount("VS-100000") as VisaAccount;
             a.DoPayment(1500, p0);
@@ -43,26 +46,34 @@ namespace Week12_Lab01_BankApp
             a.DoPurchase(15, p0);
             a.DoPurchase(39, p1);
             a.DoPayment(400, p0);
+            Console.WriteLine("\n-------------------------------");
             Console.WriteLine(a);
+
             a = Bank.GetAccount("VS-100001") as VisaAccount;
             a.DoPayment(500, p0);
             a.DoPurchase(25, p3);
             a.DoPurchase(20, p4);
             a.DoPurchase(15, p5);
+            Console.WriteLine("\n-------------------------------");
             Console.WriteLine(a);
+
             //a saving account
             SavingAccount b = Bank.GetAccount("SV-100002") as SavingAccount;
             b.Withdraw(300, p6);
             b.Withdraw(32.90m, p6);
             b.Withdraw(50, p7);
             b.Withdraw(111.11m, p8);
+            Console.WriteLine("\n-------------------------------");
             Console.WriteLine(b);
+
             b = Bank.GetAccount("SV-100003") as SavingAccount;
             b.Deposit(300, p3); //ok even though p3 is not a holder
             b.Deposit(32.90m, p2);
             b.Deposit(50, p5);
             b.Withdraw(111.11m, p10);
+            Console.WriteLine("\n-------------------------------");
             Console.WriteLine(b);
+
             //a checking account
             CheckingAccount c = Bank.GetAccount("CK-100004") as CheckingAccount;
             c.Deposit(33.33m, p7);
@@ -71,7 +82,9 @@ namespace Week12_Lab01_BankApp
             c.Withdraw(200, p4);
             c.Withdraw(645, p6);
             c.Withdraw(350, p6);
+            Console.WriteLine("\n-------------------------------");
             Console.WriteLine(c);
+
             c = Bank.GetAccount("CK-100005") as CheckingAccount;
             c.Deposit(33.33m, p8);
             c.Deposit(40.44m, p7);
@@ -79,20 +92,26 @@ namespace Week12_Lab01_BankApp
             c.Withdraw(500, p8);
             c.Withdraw(645, p10);
             c.Withdraw(850, p10);
+            Console.WriteLine("\n-------------------------------");
             Console.WriteLine(c);
+
             a = Bank.GetAccount("VS-100006") as VisaAccount;
             a.DoPayment(700, p0);
             a.DoPurchase(20, p3);
             a.DoPurchase(10, p1);
             a.DoPurchase(15, p1);
+            Console.WriteLine("\n-------------------------------");
             Console.WriteLine(a);
+
             b = Bank.GetAccount("SV-100007") as SavingAccount;
             b.Deposit(300, p3); //ok even though p3 is not a holder
             b.Deposit(32.90m, p2);
             b.Deposit(50, p5);
             b.Withdraw(111.11m, p7);
+            Console.WriteLine("\n-------------------------------");
             Console.WriteLine(b);
-            Console.WriteLine("\n\nExceptions:");
+
+            Console.WriteLine("\n\nExceptions:\n-------------------------------");
             //The following will cause exception
             try
             {
@@ -131,14 +150,15 @@ namespace Week12_Lab01_BankApp
             }
             catch (AccountException e) { Console.WriteLine(e.Message); }
             //show all transactions
-            Console.WriteLine("\n\nAll transactions");
-            foreach (var transaction in Bank.GetAllTransactions($"Transaction_{Utils.Now}.json"))
+            Console.WriteLine("\n\nAll transactions \n-------------------------------");
+            foreach (var transaction in Bank.GetAllTransactions("A_TransactionsData"))
             {
                 Console.WriteLine(transaction);
             }
                 
             foreach (var keyValuePair in Bank.ACCOUNTS)
             {
+                Console.WriteLine("\n-------------------------------");
                 Account account = keyValuePair.Value;
                 Console.WriteLine("\nBefore PrepareMonthlyReport()");
                 Console.WriteLine(account);

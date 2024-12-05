@@ -22,7 +22,7 @@ namespace Week12_Lab01_BankApp
                loginEvents.Add($"Person : {personName}, Success :{success}, DateTime : {Utils.Now}"); 
             }
 
-            SaveLoginEvents("LoginData.json");
+            SaveLoginEvents("LoginData");
         } 
         public static void TransactionHandler(Object sender, EventArgs args) {
             TransactionEventArgs transactionEventArgs = args as TransactionEventArgs;
@@ -35,12 +35,12 @@ namespace Week12_Lab01_BankApp
                 transactionEvents.Add($"Person : {personName}, Amount : ${Math.Abs(amount)}CAD, Operation : {Operation}, Success :{success}, DateTime : {Utils.Now}");
             }
 
-            SaveTransactionEvents("TransactionsData.json");
+            SaveTransactionEvents("TransactionsData");
         }
 
         public static void ShowLoginEvents( string filename ) { //---------            
-            Console.WriteLine("Showing all login events : " + Utils.Now + "\n----------------------------");
-            TextReader rd = new StreamReader($"{filename}.json");
+            Console.WriteLine("\nShowing all login events : " + Utils.Now + "\n----------------------------");
+            TextReader rd = new StreamReader(filename);
             String jsonData = rd.ReadToEnd();
             List<String> loginEvList = JsonSerializer.Deserialize<List<String>>(jsonData);
             int lcounter = 1;
@@ -52,9 +52,9 @@ namespace Week12_Lab01_BankApp
             rd.Close();          
             
         }
-        public static void ShowTransactionEvents( string filename  ) { //---------
-            Console.WriteLine("Showing all Transaction events : " + Utils.Now + "\n----------------------------");
-            TextReader rd = new StreamReader($"{filename}.json");
+        public static void ShowTransactionEvents( string filename ) { //---------
+            Console.WriteLine("\nShowing all Transaction events : " + Utils.Now + "\n----------------------------");
+            TextReader rd = new StreamReader(filename);
             String jsonData = rd.ReadToEnd();
             List<String> transactionsEvList = JsonSerializer.Deserialize<List<String>>(jsonData);
             int lcounter = 1;

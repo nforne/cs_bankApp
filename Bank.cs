@@ -97,25 +97,31 @@ namespace Week12_Lab01_BankApp
         }
         public static Person GetUser(String name){
             Person p = null;
-            foreach (String key in USERS.Keys) {
+            foreach (String key in USERS.Keys)
+            {
                 if (USERS[key].Name.Equals(name)) { p = USERS[key]; break; }
             }
-            if (p == null)
-            {
-                throw new AccountException(ExceptionType.USER_DOES_NOT_EXIST);
+            try
+            {                            
+                if (p == null)
+                {
+                    throw new AccountException(ExceptionType.USER_DOES_NOT_EXIST);
+                };                
             }
-            else {
-                return p;
-            };             
+            catch (AccountException e) {
+                Console.WriteLine(e.Message);
+            }
+            return p;
+
         }
         public static void SaveAccounts(String filename){
-            TextWriter wr = new StreamWriter($"{filename}.json");
+            TextWriter wr = new StreamWriter(filename + ".txt");
             String jsonData = JsonSerializer.Serialize(ACCOUNTS);            
             wr.WriteLine(jsonData);
             wr.Close();
         }
         public static void SaveUsers(String filename){
-            TextWriter wr = new StreamWriter($"{filename}.json");
+            TextWriter wr = new StreamWriter(filename + ".txt");
             String jsonData = JsonSerializer.Serialize(USERS);
             wr.WriteLine(jsonData);
             wr.Close();
@@ -127,7 +133,7 @@ namespace Week12_Lab01_BankApp
                 allTransactions.AddRange(ACCOUNTS[acc].transactions);
             }
 
-            TextWriter wr = new StreamWriter($"{filename}.json");
+            TextWriter wr = new StreamWriter(filename);
             String jsonData = JsonSerializer.Serialize(allTransactions);
             wr.WriteLine(jsonData);
             wr.Close();
@@ -140,14 +146,14 @@ namespace Week12_Lab01_BankApp
         public static void PrintAccounts()
         {
             foreach (String acc in ACCOUNTS.Keys) {
-                Console.WriteLine(ACCOUNTS[acc].ToString());
+                Console.WriteLine(ACCOUNTS[acc]);
             }
         }
 
         public static void PrintPersons()
-        {
+        {           
             foreach (String user in USERS.Keys) {
-                Console.WriteLine(USERS[user].ToString());
+                Console.WriteLine(USERS[user]);
             }
         }
     }

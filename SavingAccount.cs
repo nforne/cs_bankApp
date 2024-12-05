@@ -25,29 +25,34 @@ namespace Week12_Lab01_BankApp
             bool success = false;
             Transaction t = new Transaction(this.Number, amount, person, Utils.Now);
             TransactionEventArgs te = new TransactionEventArgs(person.Name, amount, success);
+            try
+            {
+                if (!this.IsUser(person.Name))
+                {
 
-            if (!this.IsUser(person.Name))
-            {
-                this.OnTransactionOccur(t, te);
-                throw new AccountException(ExceptionType.NAME_NOT_ASSOCIATED_WITH_ACCOUNT);
+                    this.OnTransactionOccur(t, te);
+                    throw new AccountException(ExceptionType.NAME_NOT_ASSOCIATED_WITH_ACCOUNT);
+                }
+                else if (!person.IsAuthenticated)
+                {
+                    this.OnTransactionOccur(t, te);
+                    throw new AccountException(ExceptionType.USER_NOT_LOGGED_IN);
+                }
+                else if (amount > (this.Balance - this.LowestBalance))
+                {
+                    this.OnTransactionOccur(t, te);
+                    throw new AccountException(ExceptionType.NO_OVERDRAFT_FOR_THIS_ACCOUNT);
+                }
+                else
+                {
+                    success = this.Balance + (-1 * amount) >= this.LowestBalance;
+                    this.OnTransactionOccur(t, te);
+                    base.Deposit((-1 * amount), person);
+                    this.transactions.Add(t);
+                };
             }
-            else if (!person.IsAuthenticated)
-            {
-                this.OnTransactionOccur(t, te);
-                throw new AccountException(ExceptionType.USER_NOT_LOGGED_IN);
-            }
-            else if (amount > (this.Balance - this.LowestBalance) )
-            {
-                this.OnTransactionOccur(t, te);
-                throw new AccountException(ExceptionType.NO_OVERDRAFT_FOR_THIS_ACCOUNT);
-            }
-            else
-            {
-                success = this.Balance + (-1 * amount) >= this.LowestBalance;
-                this.OnTransactionOccur(t, te);
-                base.Deposit((-1 * amount), person);
-                this.transactions.Add(t);
-            };
+            catch (AccountException e) { Console.WriteLine(e.Message); }
+            catch (Exception e) { Console.WriteLine(e.Message); };
 
 
         }
